@@ -1,0 +1,15 @@
+/* Estilos del proyecto. No necesita modificarlos:
+   la clase .cerrado la aplica Ticket.jsx a los tickets cerrados. */
+
+body {
+  background-color: #f7f8fa;
+}
+
+.cerrado {
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+
+.cerrado .btn {
+  text-decoration: none;
+}
