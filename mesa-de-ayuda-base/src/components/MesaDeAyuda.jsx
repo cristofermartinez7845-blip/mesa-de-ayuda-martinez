@@ -47,6 +47,9 @@ function MesaDeAyuda() {
   // R4 · const visibles = ... tickets filtrados por prioridad.
   const visibles = filtro === 'Todas' ? tickets : tickets.filter((t) => t.prioridad === filtro)
   // R5 · const abiertos / enProceso / cerrados — calculados, NO guardados en estado.
+  const abiertos = tickets.filter((t) => t.estado === 'Abierto').length
+  const enProceso = tickets.filter((t) => t.estado === 'En proceso').length
+  const cerrados = tickets.filter((t) => t.estado === 'Cerrado').length
 
   return (
     <div>
@@ -107,6 +110,7 @@ function MesaDeAyuda() {
       </ul>
 
       {/* R5 · Resumen con los tres contadores */}
+      <p className="text-muted small">Abiertos: <strong>{abiertos}</strong> · En proceso: <strong>{enProceso}</strong> · Cerrados: <strong>{cerrados}</strong></p>
     </div>
   )
 }
