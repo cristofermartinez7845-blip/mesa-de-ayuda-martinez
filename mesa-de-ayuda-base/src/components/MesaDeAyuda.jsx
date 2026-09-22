@@ -27,8 +27,14 @@ function MesaDeAyuda() {
       {/* R4 · Filtro: select de prioridad con la opción «Todas» */}
 
       <ul className="list-group mb-3">
-        {/* R1 · Recorra la lista visible con .map() y dibuje un <Ticket /> por cada elemento.
-            Recuerde la prop key y la prop onAvanzar. */}
+        {tickets.map((t)=>(
+          <Ticket key={t.id} 
+          titulo={t.titulo}
+          prioridad={t.prioridad}
+          estado={t.estado}
+          onAvanzar={() => {}}
+          />
+        ))}
       </ul>
 
       {/* R5 · Resumen con los tres contadores */}

@@ -1,4 +1,5 @@
-import MesaDeAyuda from './components/MesaDeAyuda'
+import MesaDeAyuda from './components/MesaDeAyuda';
+import Ticket from './components/Ticket';
 
 function App() {
   return (
