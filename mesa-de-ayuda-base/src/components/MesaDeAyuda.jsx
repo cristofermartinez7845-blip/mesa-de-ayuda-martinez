@@ -6,11 +6,30 @@ function MesaDeAyuda() {
   const [tickets, setTickets] = useState(TICKETS_INICIALES)
 
   // R2 · Estado del formulario: título, prioridad y mensaje de error.
+  const [titulo, setTitulo] = useState('')
+  const [prioridad, setPrioridad] = useState('Media')
+  const [error, setError] = useState('')
+
   // R4 · Estado del filtro: prioridad seleccionada ('Todas' al inicio).
 
   // R6 · useEffect con arreglo de dependencias [tickets].
 
   // R2 · function agregar() — valida el título y añade el ticket nuevo.
+  function agregar() {
+    if (titulo.length < 5) {
+      setError('El título debe tener al menos cinco caracteres')
+      return
+    }
+    setError('')
+    const nuevo = {
+      id: Date.now(),
+      titulo,
+      prioridad,
+      estado: 'Abierto',
+    }
+    setTickets([...tickets, nuevo])
+    setTitulo('')
+  }
 
   // R3 · function avanzar(id) — recorre Abierto → En proceso → Cerrado sin mutar.
 
@@ -23,16 +42,40 @@ function MesaDeAyuda() {
       <p className="text-muted small mb-4">Soporte Técnico · Universidad Técnica Latinoamericana</p>
 
       {/* R2 · Formulario: input de título, select de prioridad, botón Agregar y mensaje de error */}
+      <div className="input-group">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Título del ticket"
+          value={titulo}
+          onChange={(e) => setTitulo(e.target.value)}
+        />
+        <select
+          className="form-select"
+          style={{ maxWidth: 140 }}
+          value={prioridad}
+          onChange={(e) => setPrioridad(e.target.value)}
+        >
+          <option value="Alta">Alta</option>
+          <option value="Media">Media</option>
+          <option value="Baja">Baja</option>
+        </select>
+        <button className="btn btn-primary" onClick={agregar}>
+          Agregar
+        </button>
+      </div>
+      {error && <div className="text-danger small">{error}</div>}
 
       {/* R4 · Filtro: select de prioridad con la opción «Todas» */}
 
       <ul className="list-group mb-3">
-        {tickets.map((t)=>(
-          <Ticket key={t.id} 
-          titulo={t.titulo}
-          prioridad={t.prioridad}
-          estado={t.estado}
-          onAvanzar={() => {}}
+        {tickets.map((t) => (
+          <Ticket
+            key={t.id}
+            titulo={t.titulo}
+            prioridad={t.prioridad}
+            estado={t.estado}
+            onAvanzar={() => {}}
           />
         ))}
       </ul>
