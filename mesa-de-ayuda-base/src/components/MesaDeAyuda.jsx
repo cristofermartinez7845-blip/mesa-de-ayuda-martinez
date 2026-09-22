@@ -14,6 +14,9 @@ function MesaDeAyuda() {
   const [filtro, setFiltro] = useState('Todas')
 
   // R6 · useEffect con arreglo de dependencias [tickets].
+  useEffect(() => {
+  console.log(`Hay ${tickets.length} tickets`)
+}, [tickets])
 
   // R2 · function agregar() — valida el título y añade el ticket nuevo.
   function agregar() {
