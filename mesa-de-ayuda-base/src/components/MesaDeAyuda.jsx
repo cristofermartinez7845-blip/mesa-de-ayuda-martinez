@@ -11,6 +11,7 @@ function MesaDeAyuda() {
   const [error, setError] = useState('')
 
   // R4 · Estado del filtro: prioridad seleccionada ('Todas' al inicio).
+  const [filtro, setFiltro] = useState('Todas')
 
   // R6 · useEffect con arreglo de dependencias [tickets].
 
@@ -44,6 +45,7 @@ function MesaDeAyuda() {
 }
 
   // R4 · const visibles = ... tickets filtrados por prioridad.
+  const visibles = filtro === 'Todas' ? tickets : tickets.filter((t) => t.prioridad === filtro)
   // R5 · const abiertos / enProceso / cerrados — calculados, NO guardados en estado.
 
   return (
@@ -77,9 +79,23 @@ function MesaDeAyuda() {
       {error && <div className="text-danger small">{error}</div>}
 
       {/* R4 · Filtro: select de prioridad con la opción «Todas» */}
+      <div className="d-flex align-items-center gap-2 mt-4 mb-2">
+  <span>Filtrar por prioridad</span>
+  <select
+    className="form-select form-select-sm"
+    style={{ maxWidth: 140 }}
+    value={filtro}
+    onChange={(e) => setFiltro(e.target.value)}
+  >
+    <option value="Todas">Todas</option>
+    <option value="Alta">Alta</option>
+    <option value="Media">Media</option>
+    <option value="Baja">Baja</option>
+  </select>
+</div>
 
       <ul className="list-group mb-3">
-        {tickets.map((t) => (
+        {visibles.map((t) => (
           <Ticket
             key={t.id}
             titulo={t.titulo}
