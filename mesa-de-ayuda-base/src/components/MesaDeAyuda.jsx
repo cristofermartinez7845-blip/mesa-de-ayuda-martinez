@@ -32,6 +32,16 @@ function MesaDeAyuda() {
   }
 
   // R3 · function avanzar(id) — recorre Abierto → En proceso → Cerrado sin mutar.
+  function avanzar(id) {
+  setTickets(
+    tickets.map((t) => {
+      if (t.id !== id) return t
+      const siguiente =
+        t.estado === 'Abierto' ? 'En proceso' : t.estado === 'En proceso' ? 'Cerrado' : 'Cerrado'
+      return { ...t, estado: siguiente }
+    })
+  )
+}
 
   // R4 · const visibles = ... tickets filtrados por prioridad.
   // R5 · const abiertos / enProceso / cerrados — calculados, NO guardados en estado.
@@ -75,7 +85,7 @@ function MesaDeAyuda() {
             titulo={t.titulo}
             prioridad={t.prioridad}
             estado={t.estado}
-            onAvanzar={() => {}}
+            onAvanzar={() => avanzar(t.id)}
           />
         ))}
       </ul>
